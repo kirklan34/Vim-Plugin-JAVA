@@ -1,6 +1,5 @@
 " Plugin básico para programar en Java
-"VERSION 1.0
-
+"Version:1.1
 " Establece el archivo de tipo para Java
 autocmd BufNewFile,BufRead *.java setlocal filetype=java
 
@@ -83,3 +82,34 @@ function! s:auto_complete() abort
         call feedkeys("\<C-x>\<C-o>", 'n')
     endif
 endfunction
+
+" Crear carpeta y archivo Main.java en Linux y Windows con nombre de carpeta personalizado
+function! CreateDirAndMainJava(dir_name)
+  " Determinar el sistema operativo
+  if has("win32") || has("win64")
+    let dir_command = 'mkdir ' . a:dir_name
+    let file_command = 'echo.> ' . a:dir_name . '\\Main.java'
+  else
+    let dir_command = 'mkdir -p ' . a:dir_name
+    let file_command = 'touch ' . a:dir_name . '/Main.java'
+  endif
+
+  " Crear carpeta con el nombre especificado
+  call system(dir_command)
+  
+  " Crear archivo Main.java solo si no existe
+  if !filereadable(a:dir_name . '/Main.java')
+    call system(file_command)
+  endif
+
+  " Abrir el archivo Main.java
+  execute 'edit ' . a:dir_name . '/Main.java'
+endfunction
+
+" Asignar un comando para ejecutar la función con un argumento
+command! -nargs=1 CreateDirMainJava call CreateDirAndMainJava(<f-args>)
+
+" Mapea Ctrl+T para abrir una nueva terminal en Vim 8.0+
+nnoremap <C-t> :term<CR>
+
+set mouse=a
