@@ -12,7 +12,8 @@ Este es un **plugin básico para Vim** que añade soporte para programar en **Ja
 - **Autocompletado automático** mientras escribes en archivos `.java`.
 - **Compilación y ejecución de código Java** directamente desde Vim usando el comando `:Run`.
 - Navegación y edición mejorada de archivos Java con Vim.
-
+- NUEVOS comandos v1.1 : `:CreateDirMainJava <param: Dir Name>` Crea un directorio con un archivo Main.java
+- NUEVOS comandos v1.1 : Teclas [CTR+t] = `:term`, abre una terminal en el editor
 ### Autocompletado
 El plugin activa el autocompletado usando el omnifunc de Vim. A medida que escribes, te sugiere palabras clave, nombres de clases y métodos, basándose en los archivos `.java` en el directorio actual.
 
